@@ -40,4 +40,42 @@ public class StudentDatabaseApp {
             throw new SQLException("Driver not found");
         }
     }
+
+    /**
+     * Main method - demonstrates all CRUD operations
+     * 
+     * This method executes each function and shows the results
+     */
+    public static void main(String[] args) {
+        System.out.println("__________________________________________________________");
+        System.out.println("   COMP3005 Assignment 3 - Student Database Manager       ");
+        System.out.println("   Mahdi Bouakline                                        ");
+        System.out.println("__________________________________________________________");
+        
+        // 1. Display initial students
+        System.out.println("\n[1] Displaying all students (Initial Data):");
+        getAllStudents();
+        
+        // 2. Add a new student
+        // INCOMPLETE
+        //System.out.println("\n[2] Adding a new student...");
+        //addStudent("Alice", "Johnson", "alice.j@example.com", "2023-09-03");
+        //getAllStudents();
+        
+        // 3. Update a student's email
+        // INCOMPLETE
+        //System.out.println("\n[3] Updating email for student ID 1...");
+        //updateStudentEmail(1, "john.updated@example.com");
+        //getAllStudents();
+        
+        // 4. Delete a student
+        // INCOMPLETE
+        //System.out.println("\n[4] Deleting student ID 3...");
+        //deleteStudent(3);
+        //getAllStudents();
+        
+        System.out.println("\n__________________________________________________________");
+        System.out.println("   All operations completed successfully!                ");
+        System.out.println("__________________________________________________________");
+    }
 }
