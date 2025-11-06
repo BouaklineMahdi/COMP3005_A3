@@ -77,6 +77,78 @@ public class StudentDatabaseApp {
     }
 
     /**
+     * Inserts a new student record into the students table
+     * 
+     * This function demonstrates INSERT using PreparedStatement to prevent SQL injection
+     * 
+     * @param firstName Student's first name
+     * @param lastName Student's last name
+     * @param email Student's email address
+     * @param enrollmentDate Student's enrollment date (format: YYYY-MM-DD)
+     */
+    public static void addStudent(String firstName, String lastName, 
+                                  String email, String enrollmentDate) {
+        // SQL INSERT statement with placeholders (?)
+        String sql = "INSERT INTO students (first_name, last_name, email, enrollment_date) " +
+                     "VALUES (?, ?, ?, ?)";
+        
+        try (Connection conn = connect();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            
+            // Set parameters for the PreparedStatement
+            pstmt.setString(1, firstName);
+            pstmt.setString(2, lastName);
+            pstmt.setString(3, email);
+            pstmt.setDate(4, Date.valueOf(enrollmentDate));
+            
+            // Execute the INSERT operation
+            int rowsInserted = pstmt.executeUpdate();
+            
+            if (rowsInserted > 0) {
+                System.out.println("Student added successfully: " + firstName + " " + lastName);
+            }
+            
+        } catch (SQLException e) {
+            System.err.println("Error adding student:");
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Updates the email address for a student with the specified student_id
+     * 
+     * This function demonstrates UPDATE using PreparedStatement
+     * 
+     * @param studentId The ID of the student to update
+     * @param newEmail The new email address
+     */
+    public static void updateStudentEmail(int studentId, String newEmail) {
+        // SQL UPDATE statement with placeholders
+        String sql = "UPDATE students SET email = ? WHERE student_id = ?";
+        
+        try (Connection conn = connect();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            
+            // Set parameters
+            pstmt.setString(1, newEmail);
+            pstmt.setInt(2, studentId);
+            
+            // Execute the UPDATE operation
+            int rowsUpdated = pstmt.executeUpdate();
+            
+            if (rowsUpdated > 0) {
+                System.out.println("Email updated successfully for student ID " + studentId);
+            } else {
+                System.out.println("No student found with ID " + studentId);
+            }
+            
+        } catch (SQLException e) {
+            System.err.println("Error updating student email:");
+            e.printStackTrace();
+        }
+    }
+
+    /**
      * Main method - demonstrates all CRUD operations
      * 
      * This method executes each function and shows the results
@@ -92,16 +164,14 @@ public class StudentDatabaseApp {
         getAllStudents();
         
         // 2. Add a new student
-        // INCOMPLETE
-        //System.out.println("\n[2] Adding a new student...");
-        //addStudent("Alice", "Johnson", "alice.j@example.com", "2023-09-03");
-        //getAllStudents();
+        System.out.println("\n[2] Adding a new student...");
+        addStudent("Alice", "Johnson", "alice.j@example.com", "2023-09-03");
+        getAllStudents();
         
         // 3. Update a student's email
-        // INCOMPLETE
-        //System.out.println("\n[3] Updating email for student ID 1...");
-        //updateStudentEmail(1, "john.updated@example.com");
-        //getAllStudents();
+        System.out.println("\n[3] Updating email for student ID 1...");
+        updateStudentEmail(1, "john.updated@example.com");
+        getAllStudents();
         
         // 4. Delete a student
         // INCOMPLETE
