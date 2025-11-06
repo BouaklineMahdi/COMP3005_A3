@@ -42,6 +42,41 @@ public class StudentDatabaseApp {
     }
 
     /**
+     * Retrieves and displays all records from the students table
+     * 
+     * This function demonstrates the SELECT query using Statement
+     */
+    public static void getAllStudents() {
+        // SQL query to select all students
+        String sql = "SELECT * FROM students ORDER BY student_id";
+        
+        try (Connection conn = connect();
+             Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery(sql)) {
+            
+            System.out.println("\n=== All Students ===");
+            System.out.println("--------------------------------------------------");
+            
+            // Process the result set
+            while (rs.next()) {
+                int id = rs.getInt("student_id");
+                String firstName = rs.getString("first_name");
+                String lastName = rs.getString("last_name");
+                String email = rs.getString("email");
+                Date enrollmentDate = rs.getDate("enrollment_date");
+                
+                System.out.printf("ID: %d | Name: %s %s | Email: %s | Enrolled: %s%n",
+                                id, firstName, lastName, email, enrollmentDate);
+            }
+            System.out.println("--------------------------------------------------");
+            
+        } catch (SQLException e) {
+            System.err.println("Error retrieving students:");
+            e.printStackTrace();
+        }
+    }
+
+    /**
      * Main method - demonstrates all CRUD operations
      * 
      * This method executes each function and shows the results
