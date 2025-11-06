@@ -149,6 +149,38 @@ public class StudentDatabaseApp {
     }
 
     /**
+     * Deletes the record of the student with the specified student_id
+     * 
+     * This function demonstrates DELETE using PreparedStatement
+     * 
+     * @param studentId The ID of the student to delete
+     */
+    public static void deleteStudent(int studentId) {
+        // SQL DELETE statement with placeholder
+        String sql = "DELETE FROM students WHERE student_id = ?";
+        
+        try (Connection conn = connect();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            
+            // Set parameter
+            pstmt.setInt(1, studentId);
+            
+            // Execute the DELETE operation
+            int rowsDeleted = pstmt.executeUpdate();
+            
+            if (rowsDeleted > 0) {
+                System.out.println("Student deleted successfully (ID: " + studentId + ")");
+            } else {
+                System.out.println("No student found with ID " + studentId);
+            }
+            
+        } catch (SQLException e) {
+            System.err.println("Error deleting student:");
+            e.printStackTrace();
+        }
+    }
+
+    /**
      * Main method - demonstrates all CRUD operations
      * 
      * This method executes each function and shows the results
@@ -174,10 +206,9 @@ public class StudentDatabaseApp {
         getAllStudents();
         
         // 4. Delete a student
-        // INCOMPLETE
-        //System.out.println("\n[4] Deleting student ID 3...");
-        //deleteStudent(3);
-        //getAllStudents();
+        System.out.println("\n[4] Deleting student ID 3...");
+        deleteStudent(4);
+        getAllStudents();
         
         System.out.println("\n__________________________________________________________");
         System.out.println("   All operations completed successfully!                ");
