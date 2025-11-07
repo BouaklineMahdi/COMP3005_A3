@@ -202,12 +202,12 @@ public class StudentDatabaseApp {
         
         // 3. Update a student's email
         System.out.println("\n[3] Updating email for student ID 1...");
-        updateStudentEmail(1, "john.updated@example.com");
+        updateStudentEmail(14, "john.updated@example.com");
         getAllStudents();
         
         // 4. Delete a student
         System.out.println("\n[4] Deleting student ID 3...");
-        deleteStudent(4);
+        deleteStudent(14);
         getAllStudents();
         
         System.out.println("\n__________________________________________________________");
