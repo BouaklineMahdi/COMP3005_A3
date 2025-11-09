@@ -190,11 +190,11 @@ public class StudentDatabaseApp {
         System.out.println("   COMP3005 Assignment 3 - Student Database Manager       ");
         System.out.println("   Mahdi Bouakline                                        ");
         System.out.println("__________________________________________________________");
-        
+
         // 1. Display initial students
         System.out.println("\n[1] Displaying all students (Initial Data):");
         getAllStudents();
-        
+
         // 2. Add a new student
         System.out.println("\n[2] Adding a new student...");
         addStudent("Alice", "Johnson", "alice.j@example.com", "2023-09-03");
@@ -202,12 +202,12 @@ public class StudentDatabaseApp {
         
         // 3. Update a student's email
         System.out.println("\n[3] Updating email for student ID 1...");
-        updateStudentEmail(14, "john.updated@example.com");
+        updateStudentEmail(25, "john.updated@example.com");
         getAllStudents();
         
         // 4. Delete a student
         System.out.println("\n[4] Deleting student ID 3...");
-        deleteStudent(14);
+        deleteStudent(25);
         getAllStudents();
         
         System.out.println("\n__________________________________________________________");
